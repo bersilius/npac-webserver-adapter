@@ -46,6 +46,7 @@ export const startupServer = (container, api) => {
     // Configure the middlewares
     server.use(expressWinston.logger({ transports: [container.logger], ignoreRoute: ignoreRouteLogging(container) }))
     server.use(cookieParser()) // read cookies (needed for auth)
+    server.use(bodyParser.raw()) // for parsing application/json
     server.use(bodyParser.json()) // for parsing application/json
     server.use(bodyParser.urlencoded({ extended: true })) // get information from html forms
 
