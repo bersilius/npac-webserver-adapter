@@ -9,6 +9,7 @@ import express from 'express'
 import expressWinston from 'express-winston'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
+import xmlparser from 'express-xml-bodyparser'
 import session from 'express-session'
 import compression from 'compression'
 import { setMiddlewares } from './middlewares'
@@ -47,6 +48,7 @@ export const startupServer = (container, api) => {
     server.use(expressWinston.logger({ transports: [container.logger], ignoreRoute: ignoreRouteLogging(container) }))
     server.use(cookieParser()) // read cookies (needed for auth)
     server.use(bodyParser.raw()) // for parsing application/json
+    server.use(xmlparser())
     server.use(bodyParser.json()) // for parsing application/json
     server.use(bodyParser.urlencoded({ extended: true })) // get information from html forms
 
